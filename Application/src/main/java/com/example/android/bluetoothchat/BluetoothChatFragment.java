@@ -196,8 +196,7 @@ public class BluetoothChatFragment extends Fragment {
         // Initialize the up button with a listener that for click events
         mUpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Send a message using content of the edit text widget
-
+                // Send an Up Message
                     String message = getString(R.string.Up_Message);
                     sendMessage(message);
             }
@@ -206,7 +205,7 @@ public class BluetoothChatFragment extends Fragment {
         // Initialize the Down button with a listener that for click events
         mDownButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Send a message using content of the edit text widget
+                // Send an Down Message
                     String message = getString(R.string.Down_Message);
                     sendMessage(message);
             }
@@ -215,15 +214,23 @@ public class BluetoothChatFragment extends Fragment {
         mLockButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String message;
-                // Send a message using content of the edit text widget
-                if(LockState == 0) {
-                    LockState = 1;
-                    message = getString(R.string.Lock_Message);
-                } else {
-                    LockState = 0;
-                    message = getString(R.string.Unlock_Message);
-                }
+                //Get View and Button to change text lock/unlock
+                View view = getView();
+                if (null != view) {
+                    Button LockButton = (Button) view.findViewById(R.id.LockButton);
+                    // Check LockState, Flip it and send Lock/Unlock message
+                    if (LockState == 0) {
+                        LockState = 1;
+                        message = getString(R.string.Lock_Message);
+                        LockButton.setText(getString(R.string.Lock_button));
+
+                    } else {
+                        LockState = 0;
+                        message = getString(R.string.Unlock_Message);
+                        LockButton.setText((getString(R.string.Unlock_button)));
+                    }
                     sendMessage(message);
+                }
             }
         });
 
@@ -262,6 +269,10 @@ public class BluetoothChatFragment extends Fragment {
         if (message.length() > 0) {
             // Get the message bytes and tell the BluetoothChatService to write
             byte[] send = message.getBytes();
+            mChatService.write(send);
+
+            // send clear message to prevent repeat command
+            send = getString(R.string.Clear_Message).getBytes();
             mChatService.write(send);
 
             // Reset out string buffer to zero and clear the edit text field
