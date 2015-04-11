@@ -34,7 +34,7 @@
 
         <LinearLayout
             android:id="@+id/text"
-            android:background="#0d526c"
+            android:background="#464C4B"
             android:layout_above="@+id/buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,10 +53,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/send" />
         </LinearLayout>
-
+    <!--"#4E5454" 505453-->
         <LinearLayout
             android:id="@+id/buttons"
-            android:background="#0d526c"
+            android:background="#464C4B"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"

@@ -22,7 +22,7 @@
       android:focusable="true"
       android:focusableInTouchMode="true"
       android:id="@+id/sample_main_layout"
-      android:background="#c7e2eb">
+      android:background="#BFBFBF">
 
 
     <ViewAnimator
