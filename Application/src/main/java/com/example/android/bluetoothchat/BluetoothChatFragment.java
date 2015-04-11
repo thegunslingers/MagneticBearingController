@@ -222,12 +222,12 @@ public class BluetoothChatFragment extends Fragment {
                     if (LockState == 0) {
                         LockState = 1;
                         message = getString(R.string.Lock_Message);
-                        LockButton.setText(getString(R.string.Lock_button));
+                        LockButton.setText(getString(R.string.Unlock_button));
 
                     } else {
                         LockState = 0;
                         message = getString(R.string.Unlock_Message);
-                        LockButton.setText((getString(R.string.Unlock_button)));
+                        LockButton.setText((getString(R.string.Lock_button)));
                     }
                     sendMessage(message);
                 }
@@ -357,13 +357,32 @@ public class BluetoothChatFragment extends Fragment {
                     byte[] writeBuf = (byte[]) msg.obj;
                     // construct a string from the buffer
                     String writeMessage = new String(writeBuf);
-                    mConversationArrayAdapter.add("Me:  " + writeMessage);
+
+                    if(!writeMessage.equals("0")) {
+                        switch (writeMessage) {
+                            case "w":
+                                writeMessage = "Up";
+                                break;
+                            case "s":
+                                writeMessage = "Down";
+                                break;
+                            case "a":
+                                writeMessage = "Lock";
+                                break;
+                            case "d":
+                                writeMessage = "Unlock";
+                                break;
+                            default:
+                                break;
+                        }
+                        mConversationArrayAdapter.add("Control:  " + writeMessage);
+                    }
                     break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
+                    mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage);
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
