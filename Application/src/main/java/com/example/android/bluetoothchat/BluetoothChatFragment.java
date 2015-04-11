@@ -243,7 +243,7 @@ public class BluetoothChatFragment extends Fragment {
 
     /**
      * Makes this device discoverable.
-     */
+
     private void ensureDiscoverable() {
         if (mBluetoothAdapter.getScanMode() !=
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
@@ -252,7 +252,7 @@ public class BluetoothChatFragment extends Fragment {
             startActivity(discoverableIntent);
         }
     }
-
+    */
     /**
      * Sends a message.
      *
@@ -461,7 +461,7 @@ public class BluetoothChatFragment extends Fragment {
                 startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
                 return true;
             }
-            case R.id.insecure_connect_scan: {
+          /*  case R.id.insecure_connect_scan: {
                 // Launch the DeviceListActivity to see devices and do scan
                 Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
                 startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_INSECURE);
@@ -472,6 +472,7 @@ public class BluetoothChatFragment extends Fragment {
                 ensureDiscoverable();
                 return true;
             }
+            */
         }
         return false;
     }
