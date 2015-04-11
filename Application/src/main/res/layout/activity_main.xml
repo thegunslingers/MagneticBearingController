@@ -19,7 +19,11 @@
     android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:id="@+id/sample_main_layout">
+      android:focusable="true"
+      android:focusableInTouchMode="true"
+      android:id="@+id/sample_main_layout"
+      android:background="#c7e2eb">
+
 
     <ViewAnimator
           android:id="@+id/sample_output"

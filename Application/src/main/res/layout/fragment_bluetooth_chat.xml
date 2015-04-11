@@ -19,57 +19,75 @@
               android:layout_height="match_parent"
               android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/in"
-        android:layout_width="match_parent"
-        android:layout_height="387dp"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/edit_text_out"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center">
+        android:layout_height="fill_parent">
 
-        <Button
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/in"
+            android:layout_width="match_parent"
+            android:layout_height="359dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:layout_above="@+id/text"
+            />
+
+        <LinearLayout
+            android:id="@+id/text"
+            android:background="#041d25"
+            android:layout_above="@+id/buttons"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Up_button"
-            android:id="@+id/UpButton" />
+            android:orientation="horizontal" >
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Down_button"
-            android:id="@+id/DownButton" />
+            <EditText
+                android:id="@+id/edit_text_out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_weight="1" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Lock_button"
-            android:id="@+id/LockButton" />
+            <Button
+                android:id="@+id/button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send" />
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:background="#041d25"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Up_button"
+                android:id="@+id/UpButton" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Down_button"
+                android:id="@+id/DownButton" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Lock_button"
+                android:id="@+id/LockButton" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Unlock_button"
+                android:id="@+id/toggleButton"
+                android:checked="false" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
