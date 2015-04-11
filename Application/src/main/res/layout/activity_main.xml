@@ -29,7 +29,7 @@
           android:id="@+id/sample_output"
           android:layout_width="match_parent"
           android:layout_height="0px"
-          android:layout_weight="1">
+          android:layout_weight="12">
 
         <ScrollView
               style="@style/Widget.SampleMessageTile"
@@ -44,7 +44,8 @@
                   android:paddingRight="@dimen/horizontal_page_margin"
                   android:paddingTop="@dimen/vertical_page_margin"
                   android:paddingBottom="@dimen/vertical_page_margin"
-                  android:text="@string/intro_message" />
+                  android:text="@string/intro_message"
+                android:enabled="false" />
         </ScrollView>
 
         <fragment
@@ -63,7 +64,7 @@
 
     <FrameLayout
           android:id="@+id/sample_content_fragment"
-          android:layout_weight="78.91"
+          android:layout_weight="72.86"
           android:layout_width="match_parent"
           android:layout_height="0px" />
 

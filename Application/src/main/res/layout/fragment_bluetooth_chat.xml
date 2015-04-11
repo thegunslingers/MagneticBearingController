@@ -59,7 +59,7 @@
             android:background="#464C4B"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
             <Button
