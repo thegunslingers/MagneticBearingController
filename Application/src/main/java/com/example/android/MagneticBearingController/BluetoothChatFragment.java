@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package com.example.android.MagneticBearingController;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -41,6 +41,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.android.common.logger.Log;
 
@@ -60,15 +61,16 @@ public class BluetoothChatFragment extends Fragment {
     private ListView mConversationView;
     private EditText mOutEditText;
 
-    //Buttons
+    // Buttons
     private Button mSendButton;
     private Button mUpButton;
     private Button mDownButton;
     private Button mLockButton;
+    private ToggleButton mheightToggleButton;
 
-    //Lock Unlock State
+    // Lock Unlock State
     private int LockState = 0;
-
+    private int PrintHeight = 0;
 
     /**
      * Name of the connected device
@@ -163,6 +165,7 @@ public class BluetoothChatFragment extends Fragment {
         mUpButton = (Button) view.findViewById(R.id.UpButton);
         mDownButton = (Button) view.findViewById(R.id.DownButton);
         mLockButton = (Button) view.findViewById(R.id.LockButton);
+        mheightToggleButton = (ToggleButton) view.findViewById(R.id.heightToggleButton);
 
     }
 
@@ -215,9 +218,9 @@ public class BluetoothChatFragment extends Fragment {
             public void onClick(View v) {
                 String message;
                 //Get View and Button to change text lock/unlock
-                View view = getView();
-                if (null != view) {
-                    Button LockButton = (Button) view.findViewById(R.id.LockButton);
+               // View view = getView();
+                if (null != v) {
+                    Button LockButton = (Button) v.findViewById(R.id.LockButton);
                     // Check LockState, Flip it and send Lock/Unlock message
                     if (LockState == 0) {
                         LockState = 1;
@@ -231,6 +234,20 @@ public class BluetoothChatFragment extends Fragment {
                     }
                     sendMessage(message);
                 }
+            }
+        });
+
+        // Initialize the Down button with a listener that for click events
+        mheightToggleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if button is on allow heights to print
+                if(mheightToggleButton.isChecked()){
+                    PrintHeight = 1;
+                } else {
+                    PrintHeight = 0;
+                }
+
+
             }
         });
 
@@ -382,7 +399,9 @@ public class BluetoothChatFragment extends Fragment {
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage);
+                    if(PrintHeight == 1 ) {
+                        mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage);
+                    }
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
