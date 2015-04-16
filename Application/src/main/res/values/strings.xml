@@ -36,9 +36,11 @@
     <string name="Lock_button">Lock</string>
     <string name="Unlock_button">Unlock</string>
 
-    <string name="height_print_on">Print Height</string>
+    <string name="height_print_on">Print On</string>
     <string name="height_print_off">Print Off</string>
 
+    <string name="height_on">Height</string>
+    <string name="height_off">Track Off</string>
 
 
     <string name="not_connected">You are not connected to a device</string>

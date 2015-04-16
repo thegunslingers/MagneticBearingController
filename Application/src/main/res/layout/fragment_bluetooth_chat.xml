@@ -29,8 +29,8 @@
             android:layout_height="359dp"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
-            android:layout_above="@+id/text"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/text" />
 
         <LinearLayout
             android:id="@+id/text"
@@ -63,13 +63,13 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="49dp"
                 android:layout_height="wrap_content"
                 android:text="@string/Up_button"
                 android:id="@+id/UpButton" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:text="@string/Down_button"
                 android:id="@+id/DownButton" />
@@ -87,6 +87,14 @@
                 android:textOff="@string/height_print_off"
                 android:id="@+id/heightToggleButton"
                 android:checked="false" />
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="@string/height_on"
+                android:textOff="@string/height_off"
+                android:id="@+id/heightTrackToggleButton"
+                android:checked="false" />
+
 
         </LinearLayout>
     </RelativeLayout>

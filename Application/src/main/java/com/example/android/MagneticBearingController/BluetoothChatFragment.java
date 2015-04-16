@@ -67,11 +67,17 @@ public class BluetoothChatFragment extends Fragment {
     private Button mDownButton;
     private Button mLockButton;
     private ToggleButton mheightToggleButton;
+    private ToggleButton mheightTrackToggleButton;
+   // private Stopwatch timer = new Stopwatch();
+
 
     // Lock Unlock State
     private int LockState = 0;
     private int PrintHeight = 0;
-
+    private int PrintCount = 0;
+    String readMessage = "";
+    private double BearingHeight = 1;
+    private int PrintHeightTrack = 0;
     /**
      * Name of the connected device
      */
@@ -166,6 +172,7 @@ public class BluetoothChatFragment extends Fragment {
         mDownButton = (Button) view.findViewById(R.id.DownButton);
         mLockButton = (Button) view.findViewById(R.id.LockButton);
         mheightToggleButton = (ToggleButton) view.findViewById(R.id.heightToggleButton);
+        mheightTrackToggleButton = (ToggleButton) view.findViewById(R.id.heightTrackToggleButton);
 
     }
 
@@ -202,6 +209,14 @@ public class BluetoothChatFragment extends Fragment {
                 // Send an Up Message
                     String message = getString(R.string.Up_Message);
                     sendMessage(message);
+                    if(BearingHeight > 0.1) {
+                        BearingHeight = BearingHeight - 0.1;
+                        Log.d(TAG, "PrintHeightTrack =" + PrintHeightTrack + "BearingHeight =" + String.format("%.2f", BearingHeight));
+
+                        if (PrintHeightTrack == 1) {
+                            mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + String.format("%.2f", BearingHeight) + " mm");
+                        }
+                    }
             }
         });
 
@@ -211,6 +226,12 @@ public class BluetoothChatFragment extends Fragment {
                 // Send an Down Message
                     String message = getString(R.string.Down_Message);
                     sendMessage(message);
+                    if(BearingHeight < 1.2) {
+                        BearingHeight = BearingHeight + 0.1;
+                        if (PrintHeightTrack == 1){
+                            mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + String.format("%.2f", BearingHeight) + " mm");
+                        }
+                    }
             }
         });
         // Initialize the Lock/Unlock button with a listener that for click events
@@ -226,11 +247,17 @@ public class BluetoothChatFragment extends Fragment {
                         LockState = 1;
                         message = getString(R.string.Lock_Message);
                         LockButton.setText(getString(R.string.Unlock_button));
+                        if (PrintHeightTrack == 1){
+                            mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + 0 + " mm");
+                        }
 
                     } else {
                         LockState = 0;
                         message = getString(R.string.Unlock_Message);
                         LockButton.setText((getString(R.string.Lock_button)));
+                        if (PrintHeightTrack == 1){
+                            mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + String.format("%.2f", BearingHeight) + " mm");
+                        }
                     }
                     sendMessage(message);
                 }
@@ -245,6 +272,19 @@ public class BluetoothChatFragment extends Fragment {
                     PrintHeight = 1;
                 } else {
                     PrintHeight = 0;
+                }
+
+
+            }
+        });
+
+        mheightTrackToggleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // if button is on allow heights to print
+                if(mheightTrackToggleButton.isChecked()){
+                    PrintHeightTrack = 1;
+                 } else {
+                    PrintHeightTrack = 0;
                 }
 
 
@@ -397,11 +437,25 @@ public class BluetoothChatFragment extends Fragment {
                     break;
                 case Constants.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
+                    PrintCount++;
                     // construct a string from the valid bytes in the buffer
-                    String readMessage = new String(readBuf, 0, msg.arg1);
-                    if(PrintHeight == 1 ) {
-                        mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage);
-                    }
+                    String readMessageSingle = new String(readBuf, 0, msg.arg1);
+                    readMessage = readMessage + readMessageSingle;
+                    Log.d(TAG, "PrintCount =" + PrintCount +"ReadMessage =" + readMessage + "ReadSingle" + readMessageSingle);
+
+                    //if(PrintCount == 2) {
+                        if (PrintHeight == 1){
+                            if(readMessage.equals("u") || readMessage.equals("uu")) {
+                              //  mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage + " mm");
+                                mConversationArrayAdapter.add(mConnectedDeviceName + "I'm still running");
+                            } else {
+                                mConversationArrayAdapter.add(mConnectedDeviceName + " Bearing Height:  " + readMessage + " mm");
+                            }
+                        }
+                        PrintCount = 0;
+                        readMessage = "";
+                        
+                    //}
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
