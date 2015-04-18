@@ -264,7 +264,7 @@ public class BluetoothChatFragment extends Fragment {
             }
         });
 
-        // Initialize the Down button with a listener that for click events
+        // Initialize the Print Alive Toggle button with a listener that for click events
         mheightToggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if button is on allow heights to print
@@ -278,6 +278,7 @@ public class BluetoothChatFragment extends Fragment {
             }
         });
 
+        // Initialize the Print Height Track Toggle button with a listener that for click events
         mheightTrackToggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if button is on allow heights to print
