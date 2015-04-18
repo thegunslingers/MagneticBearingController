@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothchat;
+package com.example.android.MagneticBearingController;
 
 /**
  * Defines several constants used between {@link BluetoothChatService} and the UI.

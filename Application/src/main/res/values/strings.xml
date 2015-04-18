@@ -16,6 +16,9 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+
+    <string name="Splash_Screen">Splash_Screen</string>
+
     <!--  BluetoothChat -->
     <string name="send">Send</string>
 
@@ -26,12 +29,15 @@
     <string name="Unlock_Message">d</string>
     <string name="Clear_Message">0</string>
 
+
     <!-- Button Labels -->
     <string name="Up_button">Up</string>
     <string name="Down_button">Down</string>
     <string name="Lock_button">Lock</string>
     <string name="Unlock_button">Unlock</string>
 
+    <string name="height_print_on">Print Height</string>
+    <string name="height_print_off">Print Off</string>
 
 
 

@@ -15,7 +15,7 @@
  limitations under the License.
 -->
 <resources>
-    <string name="app_name">Magnetic Bearing Controller</string>
+    <string name="app_name">Magnetic Bearing Controller!</string>
     <string name="intro_message">
         <![CDATA[
         
